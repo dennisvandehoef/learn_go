@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  database:
+    image: mariadb:10.7.1
+    environment:
+      MYSQL_ROOT_PASSWORD: dbAdminPassword
+      MYSQL_DATABASE: recordings
+      MYSQL_USER: recordings_user
+      MYSQL_PASSWORD: recordings_pass
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql/
+
+volumes:
+  db_data: {}
