@@ -5,6 +5,7 @@ mainly pushed to git to keep track of my progress and sync between 2 machines.
 | Directory | Tutorial |
 |-----------|----------|
 |go_dev     | [Official go tutorials](https://go.dev/doc/tutorial/) |
+|tutorialspoint | [Tutorialspoint Go Tutorial](https://www.tutorialspoint.com/go/index.htm) |
 
 ## To be reminded of for later
 
