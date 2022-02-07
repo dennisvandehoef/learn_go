@@ -21,6 +21,10 @@ func init() {
 	root_dir = flag.String("p", ".", "Base path to the directory")
 	main_location = flag.String("m", "", "Path to files containing the main package (if not in root, it is likely you have multiple)")
 	flag.Parse()
+
+	if len(*main_location) > 0 && !strings.HasSuffix(*main_location, "/") {
+		*main_location = *main_location + "/"
+	}
 }
 
 func main() {
@@ -55,14 +59,15 @@ func print_package(name string, depth int8) {
 // Parse all files from the project and fill up findings
 func parseFiles(current_dir string) {
 	files, err := ioutil.ReadDir(current_dir)
+	current_dir += "/"
 	if err != nil {
 		log.Fatal(err)
 	}
 	for _, f := range files {
 		if f.IsDir() && f.Name() != "vendor" {
-			parseFiles(current_dir + "/" + f.Name())
+			parseFiles(current_dir + f.Name())
 		} else if strings.HasSuffix(f.Name(), ".go") && !strings.HasSuffix(f.Name(), "_test.go") {
-			file_path := current_dir + "/" + f.Name()
+			file_path := current_dir + f.Name()
 			package_in_file := getPackageFromFile(file_path)
 
 			// This main is not the one we are looking for
